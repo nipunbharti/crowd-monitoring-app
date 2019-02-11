@@ -19,8 +19,12 @@ class Pictures extends Component{
 
 
 	render(){
-		let renderFaces = new Array(20).fill(0).map(face => {
-			return <DetectedFaces navigation={this.props.navigation} />
+		let faceIds = this.props.navigation.getParam('faceIds');
+		let name = this.props.navigation.getParam('name');
+		let image = this.props.navigation.getParam('image');
+		console.log(faceIds, name, image);
+		let renderFaces = faceIds.map((face, index) => {
+			return <DetectedFaces navigation={this.props.navigation} name={name} faceId={face} index={index+1} />
 		})
 		return(
 				<View style={styles.mainContainer}>
@@ -33,9 +37,7 @@ class Pictures extends Component{
 					</View>
 					<View style={styles.body}> 
 						<ScrollView horizontal={true} style={styles.horizontalScroll}>
-							<SelectedPicture/>
-							<SelectedPicture/>
-							<SelectedPicture/>
+							<SelectedPicture image={image} />
 						</ScrollView>
 						<Text style={styles.descriptionText}>"Camera Name"</Text>
 						<ScrollView>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, Alert ,ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, Alert, ScrollView, ActivityIndicator} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import CodeInput from 'react-native-confirmation-code-input';
 
@@ -10,7 +10,11 @@ class Search extends Component{
 
 	constructor(props){
 		super(props);
-		this.state={date: ''};
+		this.state={
+			date: '',
+			loading: false,
+			images: []
+		};
 
 	}
 
@@ -19,16 +23,57 @@ class Search extends Component{
 	}
 
 	fetchImages = () => {
-		fetch('http://172.20.10.7:8000/timeSlicedImages')
+		this.setState({
+			loading: true
+		})
+		fetch('http://localhost:8000/timeSlicedImages')
 		.then(res => res.json())
 		.then(resJson => {
-			console.debug(resJson);
+			let newResJson = resJson.map(res =>{
+				return {'body': res.Body, 'name': res.name}
+			});
+			console.log(newResJson);
+			let newResName = resJson.map(res => res.name);
+			// console.log(newResJson);
+			var newImages = [];
+			let i=0;
+			this.setState({
+				images: newResJson
+			}, () => {
+				this.props.navigation.navigate('SearchDisplay', {
+					images: this.state.images
+				})
+				this.setState({
+					loading: false
+				})
+			})
+			newResJson.forEach(res => {
+				// res.then(data => {
+				// 	// console.log(data);
+				// 	newImages = this.state.images;
+				// 	newImages = [...newImages, data];
+				// 	console.log("newImages", newImages);
+				// 	this.setState({
+				// 		images: newImages
+				// 	}, () => {
+				// 		i++;
+				// 		if(i == newResJson.length) {
+							// this.props.navigation.navigate('SearchDisplay', {
+							// 	images: this.state.images
+							// })
+							// this.setState({
+							// 	loading: false
+							// })
+				// 		}
+				// 	});
+				// })
+			})
 		})
-		this.props.navigation.navigate('SearchDisplay')
 	}
 
 	render(){
-
+		console.log(this.state.images);
+		if(this.state.images)
 		return(
 
 					<ScrollView style={styles.mainContainer}>
@@ -89,6 +134,11 @@ class Search extends Component{
 						    	<Text style={styles.buttonText}>Search</Text> 
 						    </TouchableOpacity>
 						</View>
+						{this.state.loading &&
+						<View style={styles.loading}>
+					      <ActivityIndicator size='large' />
+					    </View>
+					   	}
 					</ScrollView>
 
 			);
@@ -149,6 +199,15 @@ const styles = StyleSheet.create({
 		textAlign:'center',
 		color:'#05c49f', 
 		fontSize:35,
-	}
+	},
+	loading: {
+	    position: 'absolute',
+	    left: 0,
+	    right: 0,
+	    top: 0,
+	    bottom: 0,
+	    alignItems: 'center',
+	    justifyContent: 'center'
+	  }
 
 });

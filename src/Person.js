@@ -14,12 +14,13 @@ class Person extends Component{
 	}
 
 	render(){
-
+		console.log(this.props.face, this.props.name)
 		return(
 				<View>
 					<TouchableOpacity 
 					onPress={this.navigateToSelectedFace}
 					style={styles.mainContainer}>
+						<Image style={{width: 100, height: 100}} source={{uri: `data:image/png;base64,${this.props.face}`}} />
 					</TouchableOpacity>
 				</View>
 			);

@@ -18,8 +18,11 @@ class SearchDisplay extends Component{
 	}
 
 	render(){
-		let renderFaces = new Array(20).fill(0).map(face => {
-			return <Faces navigation={this.props.navigation} />
+		let images = this.props.navigation.getParam('images', 'Not found');
+		console.log(images);
+		let imageArray = [];
+		let renderFaces = images.map((face, index) => {
+			return <Faces key={index} navigation={this.props.navigation} image={face.body} name={face.name} />
 		})
 		return(
 			<View style={styles.mainContainer}>

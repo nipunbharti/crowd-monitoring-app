@@ -16,8 +16,11 @@ class SelectedFace extends Component{
 	}
 
 	render(){
-			let renderFaces = new Array(20).fill(0).map(face => {
-			return <Person navigation={this.props.navigation} />
+		let index = this.props.navigation.getParam('index');
+		let images = this.props.navigation.getParam('images');
+		console.log(images);
+			let renderFaces = images.map(face => {
+			return <Person navigation={this.props.navigation} face={face.body} name={face.name} />
 			})
 		return(
 				<View style={styles.mainContainer}>
@@ -29,7 +32,9 @@ class SelectedFace extends Component{
 						<Text style={styles.headerText}>CroMdev</Text>
 					</View>
 					<View style={styles.body}>
-						<View style={styles.SelectedFace}/>
+						<View style={styles.SelectedFace}>
+							<Text>{index}</Text>
+						</View>
 						<ScrollView>
 							<View style={styles.scroll}>
 								{renderFaces}

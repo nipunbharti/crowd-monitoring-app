@@ -9,16 +9,37 @@ class Faces extends Component{
 		super(props);
 	}
 
-	navigateToPictures = () => {
-		//console.log(this.props.navigation);
-		this.props.navigation.navigate('Pictures')
+	navigateToPictures = (e, name) => {
+		console.log(name);
+		fetch('http://localhost:8000/getFaceID', {
+			method: 'POST',
+			headers: {
+			  Accept: 'application/json',
+			  'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+			  imageName: name,
+			}),
+		})
+		.then(res => res.json())
+		.then(resJson => {
+			let newResJson = resJson.map(res => res.FaceId);
+			console.log(newResJson);
+			this.props.navigation.navigate('Pictures', {
+				name: name,
+				faceIds: newResJson,
+				image: this.props.image
+			})
+		})
+		.catch(err => console.log(err))
 	}
 
-	render() {		
+	render() {
 		return(
 				<TouchableOpacity style={styles.mainContainer}
-					onPress={this.navigateToPictures}
+					onPress={(e) => this.navigateToPictures(e, this.props.name)}
 				>
+					<Image style={{width: 150, height: 150}} source={{uri: `data:image/png;base64,${this.props.image}`}} />
 				</TouchableOpacity>
 			);
 	}
