@@ -13,7 +13,10 @@ class Search extends Component{
 		this.state={
 			date: '',
 			loading: false,
-			images: []
+			images: [],
+			date: '',
+			time1: '',
+			time2: ''
 		};
 
 	}
@@ -26,7 +29,18 @@ class Search extends Component{
 		this.setState({
 			loading: true
 		})
-		fetch('http://localhost:8000/timeSlicedImages')
+		console.log(this.state.date.slice(0,4).concat('2019'+this.state.time1), this.state.date.slice(0,4).concat('2019'+this.state.time2));
+		fetch('http://localhost:8000/timeSlicedImages', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+			    'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				time1: this.state.date.slice(0,4).concat('2019'+this.state.time1),
+				time2: this.state.date.slice(0,4).concat('2019'+this.state.time2),
+			})
+		})
 		.then(res => res.json())
 		.then(resJson => {
 			let newResJson = resJson.map(res =>{
@@ -47,7 +61,8 @@ class Search extends Component{
 					loading: false
 				})
 			})
-			newResJson.forEach(res => {
+			// Old method
+			// newResJson.forEach(res => {
 				// res.then(data => {
 				// 	// console.log(data);
 				// 	newImages = this.state.images;
@@ -67,8 +82,26 @@ class Search extends Component{
 				// 		}
 				// 	});
 				// })
-			})
+			// })
 		})
+	}
+
+	_onFulfill = async (code, type) => {
+		if(type == 'date') {
+			this.setState({
+				date: code
+			})
+		}
+		if(type == 'time1') {
+			this.setState({
+				time1: code
+			})
+		}
+		if(type == 'time2') {
+			this.setState({
+				time2: code
+			})
+		}
 	}
 
 	render(){
@@ -97,9 +130,8 @@ class Search extends Component{
 						      activeColor='#05c49f'
 	      					  inactiveColor='#05c49f'
 	      					  onChangeText={(date) => this.setState({date})}
-						      //onFulfill={(code) => this._onFulfill(code)}
+						      onFulfill={(code) => this._onFulfill(code, 'date')}
 						    />
-						    {console.log('hey')}
 						     <Text style={styles.bodyText}>Time Range</Text>
 							 <CodeInput
 						      ref="codeInputRef1"
@@ -112,7 +144,7 @@ class Search extends Component{
 						      activeColor='#05c49f'
 	      					  inactiveColor='#05c49f'
 	      					  onChangeText={(date) => this.setState({date})}
-						      onFulfill={(code) => this._onFulfill(code)}
+						      onFulfill={(code) => this._onFulfill(code, 'time1')}
 						    />
 
 						    <Text style={styles.bodyText}>To</Text>
@@ -127,7 +159,7 @@ class Search extends Component{
 						      activeColor='#05c49f'
 	      					  inactiveColor='#05c49f'
 	      					  onChangeText={(date) => this.setState({date})}
-						      onFulfill={(code) => this._onFulfill(code)}
+						      onFulfill={(code) => this._onFulfill(code, 'time2')}
 						    />
 						    <TouchableOpacity style={styles.searchButton} 
 						    onPress={this.fetchImages}>
