@@ -24,7 +24,7 @@ class LiveTrackingCamera extends Component{
 				onPress ={this.navigateToLiveTracking}
 				>
 					<View style={{flex:1,justifycontent:'flex-end'}}>
-						<Text style={styles.text}>xxx</Text>
+						<Image style={{width: width*0.9, height: height*0.25}} source={{uri: `data:image/png;base64,${this.props.body}`}} />
 					</View>
 				</TouchableOpacity>
 			);

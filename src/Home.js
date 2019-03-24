@@ -1,13 +1,36 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, Alert} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
 
 
 const {height,width} = Dimensions.get('window');
 
 class Home extends Component {
 
+	constructor(props) {
+		super(props);
+		this.state = {
+			loading: false
+		}
+	}
+
 	static navigationOptions = {
 		header: null
+	}
+
+	navigateToLiveTracking = () => {
+		this.setState({
+			loading: true
+		})
+		fetch('http://localhost:8000/getLatestImage')
+		.then(res => res.json())
+		.then(resJson => {
+			this.setState({loading: false})
+			this.props.navigation.navigate('LiveTracking', {
+				mainImageBody: resJson.Body,
+				mainImageName: resJson.name,
+				mainImageTime: resJson.LastModified
+			})
+		})
 	}
 	
 	render() {
@@ -28,14 +51,18 @@ class Home extends Component {
 			       
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.features} 
-					onPress={() => {
-    					this.props.navigation.navigate('LiveTracking')}}>
+					onPress={this.navigateToLiveTracking}>
     				<Image style={styles.icon1}
 			          source={require('../Assets/tracking.png')}
 			        />
 			        <Text style={styles.iconText}>Live Tracking</Text>
 				</TouchableOpacity>
 				</View>
+				{this.state.loading &&
+				<View style={styles.loading}>
+			      <ActivityIndicator size='large' />
+			    </View>
+			   	}
 			</View>
 		);
 	}
@@ -84,6 +111,15 @@ const styles = StyleSheet.create({
 	iconText:{
 		fontSize:50,
 		color:'#05c49f',
+	},
+	loading: {
+	position: 'absolute',
+		left: 0,
+		right: 0,
+		top: 0,
+		bottom: 0,
+		alignItems: 'center',
+		justifyContent: 'center'
 	}
 
 });
