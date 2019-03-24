@@ -10,9 +10,13 @@ class DetectedFacesLive extends Component{
 
 	}
 
+	navigateToDetectedFace = () => {
+		this.props.navigation.navigate('SelectedFaceLive')
+	}
+
 	render(){
 		return(
-				<TouchableOpacity style={styles.faces}>
+				<TouchableOpacity style={styles.faces} onPress={this.navigateToDetectedFace}>
 					<Text style={{fontSize: 20, color: 'white'}}>Hello</Text>
 				</TouchableOpacity>
 			);

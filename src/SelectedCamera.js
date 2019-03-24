@@ -48,8 +48,8 @@ class SelectedCamera extends Component{
 					        	<SelectedCameraPicture/>
 					        	<ScrollView>
 									<View style={styles.VerticalScroll}>
-										<DetectedFacesLive/>
-										<DetectedFacesLive/>
+										<DetectedFacesLive navigation={this.props.navigation}/>
+										<DetectedFacesLive navigation={this.props.navigation}/>
 										<DetectedFacesLive/>
 										<DetectedFacesLive/>
 										<DetectedFacesLive/>
