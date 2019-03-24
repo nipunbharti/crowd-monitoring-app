@@ -12,7 +12,8 @@ class LiveTracking extends Component{
 	constructor(props){
 		super(props);
 		this.state ={
-			live:true
+			live:true,
+			loading: false
 		};
 	}
 
@@ -27,6 +28,18 @@ class LiveTracking extends Component{
 		       })
 		    }, 1000);
 		}
+
+	setStateToTrue = () => {
+		this.setState({
+			loading: true
+		})
+	}
+
+	setStateToFalse = () => {
+		this.setState({
+			loading: false
+		})
+	}
 
 	render(){
 		let mainImageBody = this.props.navigation.getParam('mainImageBody');
@@ -50,10 +63,15 @@ class LiveTracking extends Component{
 					        />
 					    }
 					        <View style={{paddingVertical:40}}>
-					        	<LiveTrackingCamera navigation={this.props.navigation} body={mainImageBody} name={mainImageName} time={mainImageTime} />
+					        	<LiveTrackingCamera navigation={this.props.navigation} setStateToTrue={this.setStateToTrue} setStateToFalse={this.setStateToFalse} body={mainImageBody} name={mainImageName} time={mainImageTime} />
 					        	<LiveTrackingCamera navigation={this.props.navigation} />
 							</View>
 					</View>
+					{this.state.loading &&
+					<View style={styles.loading}>
+				      <ActivityIndicator size='large' />
+				    </View>
+				   	}
 				</ScrollView>
 
 			);
@@ -97,6 +115,15 @@ const styles = StyleSheet.create({
 	icon1:{
 		height:40,
 		width:120,
+	},
+	loading: {
+		position: 'absolute',
+		left: 0,
+		right: 0,
+		top: 0,
+		bottom: 0,
+		alignItems: 'center',
+		justifyContent: 'center'
 	}
 
 

@@ -13,7 +13,42 @@ class LiveTrackingCamera extends Component{
 	}
 
 	navigateToLiveTracking = () => {
-		this.props.navigation.navigate('SelectedCamera')
+		this.props.setStateToTrue();
+		fetch('http://localhost:8000/getFaceID', {
+			method: 'POST',
+			headers: {
+			  Accept: 'application/json',
+			  'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+			  imageName: this.props.name,
+			}),
+		})
+		.then(res => res.json())
+		.then(resJson => {
+			console.log(resJson);
+			fetch('http://localhost:8000/getCroppedImage', {
+				method: 'POST',
+				headers: {
+				  Accept: 'application/json',
+				  'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+				  imageName: this.props.name,
+				  data: resJson
+				}),
+			})
+			.then(res1 => res1.json())
+			.then(resJson1 => {
+				this.props.setStateToFalse();
+				this.props.navigation.navigate('SelectedCamera', {
+					mainImageBody: this.props.body,
+					mainImageName: this.props.name,
+					mainImageTime: this.props.time,
+					croppedData: resJson1.croppedData
+				})
+			})
+		})
 	}
 
 

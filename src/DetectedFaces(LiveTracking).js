@@ -11,13 +11,31 @@ class DetectedFacesLive extends Component{
 	}
 
 	navigateToDetectedFace = () => {
-		this.props.navigation.navigate('SelectedFaceLive')
+		fetch('http://localhost:8000/getImages', {
+			method: 'POST',
+			headers: {
+			  Accept: 'application/json',
+			  'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				faceID: this.props.faceId,
+				externalID: this.props.mainImageName
+			}),
+		})
+		.then(res => res.json())
+		.then(resJson => {
+			console.log(resJson);
+			this.props.navigation.navigate('SelectedFaceLive', {
+				data: resJson,
+				selectedFace: this.props.body
+			})
+		})
 	}
 
 	render(){
 		return(
 				<TouchableOpacity style={styles.faces} onPress={this.navigateToDetectedFace}>
-					<Text style={{fontSize: 20, color: 'white'}}>Hello</Text>
+					<Image style={{width: 100, height: 100}} source={{uri: `data:image/png;base64,${this.props.body}`}} />
 				</TouchableOpacity>
 			);
 	}

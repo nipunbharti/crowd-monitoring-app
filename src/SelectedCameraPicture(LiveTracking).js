@@ -15,7 +15,7 @@ class SelectedCameraPicture extends Component{
 
 		return(
 				<TouchableOpacity style={styles.mainContainer}>
-					<Image style={{width: 250, height: 250}} />
+					<Image style={{width: 250, height: 250}} source={{uri: `data:image/png;base64,${this.props.body}`}} />
 				</TouchableOpacity>
 			);	
 	}

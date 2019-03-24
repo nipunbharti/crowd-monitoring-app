@@ -28,6 +28,11 @@ class SelectedCamera extends Component{
 		}
 
 	render(){
+		let croppedData = this.props.navigation.getParam('croppedData');
+		let mainImageBody = this.props.navigation.getParam('mainImageBody');
+		let mainImageName = this.props.navigation.getParam('mainImageName');
+		let mainImageTime = this.props.navigation.getParam('mainImageTime');
+		let renderCroppedFaces = croppedData.map((face, index) => <DetectedFacesLive mainImageName={mainImageName} navigation={this.props.navigation} body={face.body} faceId={face.faceId} />)
 		return(
 				<ScrollView style={styles.mainContainer}>
 					<View style={styles.header}>
@@ -45,14 +50,10 @@ class SelectedCamera extends Component{
 					        />
 					    }
 					        <View style={{paddingVertical:40,alignItems:'center'}}>
-					        	<SelectedCameraPicture/>
+					        	<SelectedCameraPicture body={mainImageBody} />
 					        	<ScrollView>
 									<View style={styles.VerticalScroll}>
-										<DetectedFacesLive navigation={this.props.navigation}/>
-										<DetectedFacesLive navigation={this.props.navigation}/>
-										<DetectedFacesLive/>
-										<DetectedFacesLive/>
-										<DetectedFacesLive/>
+										{renderCroppedFaces}
 									</View>
 								</ScrollView>
 							</View>

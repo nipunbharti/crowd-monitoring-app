@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, Alert ,ScrollView} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Person from './Person';
+import Person from './Person(LiveTracking)';
 
 const {height,width} = Dimensions.get('window');
 
@@ -16,6 +16,9 @@ class SelectedFaceLive extends Component{
 	}
 
 	render(){
+		let data = this.props.navigation.getParam('data');
+		let selectedFace = this.props.navigation.getParam('selectedFace');
+		let renderFaces = data.map(value => <Person body={value.Body} time={value.LastModified} />)
 		return(
 				<View style={styles.mainContainer}>
 					<View style={styles.header}>
@@ -27,18 +30,11 @@ class SelectedFaceLive extends Component{
 					</View>
 					<View style={styles.body}>
 						<View style={styles.SelectedFace}>
-							<Image style={{width: 150, height: 150}}/>
+							<Image style={{width: 150, height: 150}} source={{uri: `data:image/png;base64,${selectedFace}`}} />
 						</View>
 						<ScrollView>
 							<View style={styles.scroll}>
-								<Person/>
-								<Person/>
-								<Person/>
-								<Person/>
-								<Person/>
-								<Person/>
-								<Person/>
-								<Person/>
+								{renderFaces}
 							</View>
 						</ScrollView>
 					</View>
