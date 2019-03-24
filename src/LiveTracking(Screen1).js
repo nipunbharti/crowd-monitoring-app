@@ -29,7 +29,9 @@ class LiveTracking extends Component{
 		}
 
 	render(){
-		console.log(this.props.navigation);
+		let mainImageBody = this.props.navigation.getParam('mainImageBody');
+		let mainImageName = this.props.navigation.getParam('mainImageName');
+		let mainImageTime = this.props.navigation.getParam('mainImageTime');
 		return(
 
 				<ScrollView>
@@ -48,7 +50,7 @@ class LiveTracking extends Component{
 					        />
 					    }
 					        <View style={{paddingVertical:40}}>
-					        	<LiveTrackingCamera navigation={this.props.navigation} />
+					        	<LiveTrackingCamera navigation={this.props.navigation} body={mainImageBody} name={mainImageName} time={mainImageTime} />
 					        	<LiveTrackingCamera navigation={this.props.navigation} />
 							</View>
 					</View>
