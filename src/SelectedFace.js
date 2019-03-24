@@ -16,8 +16,9 @@ class SelectedFace extends Component{
 	}
 
 	render(){
-		let index = this.props.navigation.getParam('index');
 		let images = this.props.navigation.getParam('images');
+		let faceBody = this.props.navigation.getParam('faceBody');
+		console.log("Facebody", faceBody);
 		console.log(images);
 			let renderFaces = images.map(face => {
 			return <Person navigation={this.props.navigation} face={face.body} name={face.name} />
@@ -33,7 +34,7 @@ class SelectedFace extends Component{
 					</View>
 					<View style={styles.body}>
 						<View style={styles.SelectedFace}>
-							<Text>{index}</Text>
+							<Image style={{width: 150, height: 150}} source={{uri: `data:image/png;base64,${faceBody}`}} />
 						</View>
 						<ScrollView>
 							<View style={styles.scroll}>

@@ -24,7 +24,7 @@ class Pictures extends Component{
 		let image = this.props.navigation.getParam('image');
 		console.log(faceIds, name, image);
 		let renderFaces = faceIds.map((face, index) => {
-			return <DetectedFaces navigation={this.props.navigation} name={name} faceId={face} index={index+1} />
+			return <DetectedFaces navigation={this.props.navigation} name={name} faceId={face.faceId} faceBody={face.faceBody} index={index+1} />
 		})
 		return(
 				<View style={styles.mainContainer}>
