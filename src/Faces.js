@@ -23,8 +23,13 @@ class Faces extends Component{
 		})
 		.then(res => res.json())
 		.then(resJson => {
-			let newResJson = resJson.map(res => res.FaceId);
-			console.log(newResJson);
+			let newResJson = [];
+			console.log(resJson);
+			resJson.forEach(value => {
+				newResJson.push({faceId: value.FaceId, faceBody: value.body})
+			})
+			// let newResJson = resJson.map(res => {faceId: res.FaceId, faceBody: res.body});
+			console.log("New res json", newResJson);
 			this.props.navigation.navigate('Pictures', {
 				name: name,
 				faceIds: newResJson,

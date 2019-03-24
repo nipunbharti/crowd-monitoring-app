@@ -30,7 +30,7 @@ class DetectedFaces extends Component{
 			})
 			console.log(newResJson);
 			this.props.navigation.navigate('SelectedFace', {
-				index: this.props.index,
+				faceBody: this.props.faceBody,
 				images: newResJson
 			})
 		})
@@ -42,7 +42,7 @@ class DetectedFaces extends Component{
 				<TouchableOpacity style={styles.faces}
 				onPress={this.navigateToSelectedFace}
 				>
-					<Text style={{fontSize: 20, color: 'white'}}>{this.props.index}</Text>
+					<Image style={{width: 100, height: 100}} source={{uri: `data:image/png;base64,${this.props.faceBody}`}} />
 				</TouchableOpacity>
 			);
 	}
