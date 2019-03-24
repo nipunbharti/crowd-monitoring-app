@@ -22,7 +22,7 @@ class Pictures extends Component{
 		let faceIds = this.props.navigation.getParam('faceIds');
 		let name = this.props.navigation.getParam('name');
 		let image = this.props.navigation.getParam('image');
-		console.log(faceIds, name, image);
+		//console.log(faceIds, name, image);
 		let renderFaces = faceIds.map((face, index) => {
 			return <DetectedFaces navigation={this.props.navigation} name={name} faceId={face} index={index+1} />
 		})

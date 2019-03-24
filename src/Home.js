@@ -16,7 +16,8 @@ class Home extends Component {
 				<View style={styles.header}>
 					<Text style={styles.headerText}>CroMdev</Text>
 				</View>
-				<TouchableOpacity style={styles.mainContainer}
+				<View  style={styles.mainContainer}>
+				<TouchableOpacity style={styles.features}
 					onPress={() => {
     					this.props.navigation.navigate('Search')}}
 					>
@@ -26,6 +27,15 @@ class Home extends Component {
 			        <Text style={styles.iconText}>Face Search</Text>
 			       
 				</TouchableOpacity>
+				<TouchableOpacity style={styles.features} 
+					onPress={() => {
+    					this.props.navigation.navigate('LiveTracking')}}>
+    				<Image style={styles.icon1}
+			          source={require('../Assets/tracking.png')}
+			        />
+			        <Text style={styles.iconText}>Live Tracking</Text>
+				</TouchableOpacity>
+				</View>
 			</View>
 		);
 	}
@@ -57,11 +67,18 @@ const styles = StyleSheet.create({
 		backgroundColor:'#030f1f',
 		alignItems:'center',
 		justifyContent:'center',
+		paddingBottom:20,
+	},
+
+	features:{
+		flex:1,
+		alignItems:'center',
+		justifyContent:'center',
 	},
 
 	icon1:{
-		height:height*0.4,
-		width:width*0.6,
+		height:200,
+		width:200,
 	},
 
 	iconText:{

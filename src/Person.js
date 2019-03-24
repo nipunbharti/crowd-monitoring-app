@@ -14,7 +14,7 @@ class Person extends Component{
 	}
 
 	render(){
-		console.log(this.props.face, this.props.name)
+		//console.log(this.props.face, this.props.name)
 		return(
 				<View>
 					<TouchableOpacity 

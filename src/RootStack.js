@@ -8,6 +8,9 @@ import Pictures from './Pictures';
 import Faces from './Faces';
 import DetectedFaces from './DetectedFaces';
 import SelectedFace from './SelectedFace';
+import LiveTracking from './LiveTracking(Screen1)';
+import SelectedCamera from './SelectedCamera';
+
 
 const RootStack = createStackNavigator({
 		Splash: SplashScreen,
@@ -15,7 +18,9 @@ const RootStack = createStackNavigator({
 		Search:Search,
 		SearchDisplay:SearchDisplay,
 		Pictures: Pictures,
-		SelectedFace: SelectedFace
+		SelectedFace: SelectedFace,
+		LiveTracking: LiveTracking,
+		SelectedCamera:SelectedCamera,
 	},
 	{
 		initialRouteName: 'Splash'
