@@ -32,7 +32,7 @@ class SelectedFaceLive extends Component{
 						<View style={styles.SelectedFace}>
 							<Image style={{width: 150, height: 150}} source={{uri: `data:image/png;base64,${selectedFace}`}} />
 						</View>
-						<ScrollView>
+						<ScrollView style={{marginBottom:20}}>
 							<View style={styles.scroll}>
 								{renderFaces}
 							</View>
@@ -48,7 +48,7 @@ export default SelectedFaceLive;
 const styles = StyleSheet.create({
 
 	mainContainer:{
-		flex:1,
+		//flex:1,
 	},
 
 	header:{
@@ -84,10 +84,11 @@ const styles = StyleSheet.create({
 	},
 
 	scroll:{
+		flex:1,
 		padding:20,
-		flexWrap:'wrap',
-		flexDirection:'row',
+		flexDirection:'column',
 		justifyContent:'space-between',
+		
 	}
 
 });

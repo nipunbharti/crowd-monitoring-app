@@ -9,7 +9,7 @@
   "dependencies": {
     "@ibm/plex": "^1.2.3",
     "react": "16.6.3",
-    "react-native": "0.58.3",
+    "react-native": "^0.59.3",
     "react-native-confirmation-code-input": "^1.0.4",
     "react-native-gesture-handler": "^1.0.15",
     "react-native-vector-icons": "^6.2.0",
