@@ -20,7 +20,7 @@ class Person extends Component{
 					<TouchableOpacity 
 					onPress={this.navigateToSelectedFace}
 					style={styles.mainContainer}>
-						<Image style={{width: 100, height: 100}} source={{uri: `data:image/png;base64,${this.props.face}`}} />
+						<Image style={{width: 99, height: 99,borderRadius:10}} source={{uri: `data:image/png;base64,${this.props.face}`}} />
 					</TouchableOpacity>
 				</View>
 			);

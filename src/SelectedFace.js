@@ -24,7 +24,7 @@ class SelectedFace extends Component{
 			return <Person navigation={this.props.navigation} face={face.body} name={face.name} />
 			})
 		return(
-				<View style={styles.mainContainer}>
+				<ScrollView style={styles.mainContainer}>
 					<View style={styles.header}>
 						<TouchableOpacity onPress={() => {
 						this.props.navigation.goBack()}}>
@@ -34,7 +34,7 @@ class SelectedFace extends Component{
 					</View>
 					<View style={styles.body}>
 						<View style={styles.SelectedFace}>
-							<Image style={{width: 150, height: 150}} source={{uri: `data:image/png;base64,${faceBody}`}} />
+							<Image style={{width: 150, height: 150,borderRadius:10}} source={{uri: `data:image/png;base64,${faceBody}`}} />
 						</View>
 						<ScrollView>
 							<View style={styles.scroll}>
@@ -42,7 +42,7 @@ class SelectedFace extends Component{
 							</View>
 						</ScrollView>
 					</View>
-				</View>
+				</ScrollView>
 			);
 	}
 }

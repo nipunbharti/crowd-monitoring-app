@@ -44,7 +44,7 @@ class Faces extends Component{
 				<TouchableOpacity style={styles.mainContainer}
 					onPress={(e) => this.navigateToPictures(e, this.props.name)}
 				>
-					<Image style={{width: 150, height: 150}} source={{uri: `data:image/png;base64,${this.props.image}`}} />
+					<Image style={{width: 150, height: 150,borderRadius:10}} source={{uri: `data:image/png;base64,${this.props.image}`}} />
 				</TouchableOpacity>
 			);
 	}

@@ -15,7 +15,7 @@ class SelectedPicture extends Component{
 
 		return(
 				<TouchableOpacity style={styles.mainContainer}>
-					<Image style={{width: 250, height: 250}} source={{uri: `data:image/png;base64,${this.props.image}`}} />
+					<Image style={{width: 250, height: 250,borderRadius:10}} source={{uri: `data:image/png;base64,${this.props.image}`}} />
 				</TouchableOpacity>
 			);	
 	}

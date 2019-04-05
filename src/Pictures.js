@@ -27,7 +27,7 @@ class Pictures extends Component{
 			return <DetectedFaces navigation={this.props.navigation} name={name} faceId={face.faceId} faceBody={face.faceBody} index={index+1} />
 		})
 		return(
-				<View style={styles.mainContainer}>
+				<ScrollView style={styles.mainContainer}>
 					<View style={styles.header}>
 						<TouchableOpacity onPress={() => {
 						this.props.navigation.goBack()}}>
@@ -36,17 +36,17 @@ class Pictures extends Component{
 						<Text style={styles.headerText}>CroMdev</Text>
 					</View>
 					<View style={styles.body}> 
-						<ScrollView horizontal={true} style={styles.horizontalScroll}>
+						<View style={styles.horizontalScroll}>
 							<SelectedPicture image={image} />
-						</ScrollView>
-						<Text style={styles.descriptionText}>"Camera Name"</Text>
+						</View>
+						<Text style={styles.descriptionText}>Detected Faces</Text>
 						<ScrollView>
 							<View style={styles.VerticalScroll}>
 								{renderFaces}
 							</View>
 						</ScrollView>
 					</View>
-				</View>
+				</ScrollView>
 			);
 	}
 }
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
 
 	mainContainer:{
 		flex:1,
+		backgroundColor:'#030f1f',
 	},
 
 	header:{
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
 
 	horizontalScroll:{
 		paddingVertical:20,
+		alignItems:'center',	
 	},
 
 	descriptionText:{
@@ -93,7 +95,8 @@ const styles = StyleSheet.create({
 	},
 
 	VerticalScroll:{
-		padding:20,
+		paddingHorizontal:40,
+		paddingVertical:20,
 		backgroundColor:'#030f1f',
 		flexWrap:'wrap',
 		flexDirection:'row',

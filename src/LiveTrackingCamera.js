@@ -59,7 +59,7 @@ class LiveTrackingCamera extends Component{
 				onPress ={this.navigateToLiveTracking}
 				>
 					<View style={{flex:1,justifycontent:'flex-end'}}>
-						<Image style={{width: width*0.9, height: height*0.25}} source={{uri: `data:image/png;base64,${this.props.body}`}} />
+						<Image style={{width: 350, height:200, borderRadius:20}} source={{uri: `data:image/png;base64,${this.props.body}`}} />
 					</View>
 				</TouchableOpacity>
 			);
@@ -71,8 +71,8 @@ export default LiveTrackingCamera;
 const styles = StyleSheet.create({
 
 	container:{
-		height:height*0.25,
-		width:width*0.9,
+		height:200,
+		width:350,
 		borderWidth:2,
 		borderColor:'#05c49f',
 		borderRadius:20,

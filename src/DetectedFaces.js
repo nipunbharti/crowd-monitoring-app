@@ -42,7 +42,7 @@ class DetectedFaces extends Component{
 				<TouchableOpacity style={styles.faces}
 				onPress={this.navigateToSelectedFace}
 				>
-					<Image style={{width: 100, height: 100}} source={{uri: `data:image/png;base64,${this.props.faceBody}`}} />
+					<Image style={{width: 100, height: 100,borderRadius:50}} source={{uri: `data:image/png;base64,${this.props.faceBody}`}} />
 				</TouchableOpacity>
 			);
 	}
@@ -54,8 +54,8 @@ export default DetectedFaces;
 const styles = StyleSheet.create({
 
 	faces:{
-		height:100,
-		width:100,
+		height:120,
+		width:120,
 		borderWidth:2,
 		borderRadius:50,
 		borderColor:'#05c49f',
