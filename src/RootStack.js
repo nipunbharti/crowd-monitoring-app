@@ -11,6 +11,7 @@ import SelectedFace from './SelectedFace';
 import LiveTracking from './LiveTracking(Screen1)';
 import SelectedCamera from './SelectedCamera';
 import SelectedFaceLive from './SelectedFace(LiveTracking)';
+import Zone from './Zone';
 
 
 const RootStack = createStackNavigator({
@@ -23,6 +24,7 @@ const RootStack = createStackNavigator({
 		LiveTracking: LiveTracking,
 		SelectedCamera:SelectedCamera,
 		SelectedFaceLive:SelectedFaceLive,
+		Zone:Zone,
 	},
 	{
 		initialRouteName: 'Splash'

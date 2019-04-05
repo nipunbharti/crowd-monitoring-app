@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
+import {View, ScrollView, Text, StyleSheet, Dimensions, Image, TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
 
 
 const {height,width} = Dimensions.get('window');
@@ -35,35 +35,40 @@ class Home extends Component {
 	
 	render() {
 		return (
-			<View style={styles.home}>
+			<ScrollView style={styles.home}>
 				<View style={styles.header}>
 					<Text style={styles.headerText}>CroMdev</Text>
 				</View>
-				<View  style={styles.mainContainer}>
-				<TouchableOpacity style={styles.features}
-					onPress={() => {
-    					this.props.navigation.navigate('Search')}}
-					>
-					<Image style={styles.icon1}
-			          source={require('../Assets/search.png')}
-			        />
-			        <Text style={styles.iconText}>Face Search</Text>
-			       
-				</TouchableOpacity>
-				<TouchableOpacity style={styles.features} 
-					onPress={this.navigateToLiveTracking}>
-    				<Image style={styles.icon1}
-			          source={require('../Assets/tracking.png')}
-			        />
-			        <Text style={styles.iconText}>Live Tracking</Text>
-				</TouchableOpacity>
+				<View style={styles.mainContainer}>
+					<TouchableOpacity style={styles.features}
+						onPress={() => {
+	    					this.props.navigation.navigate('Search')}}
+						>
+						<Image style={styles.icon1}
+				          source={require('../Assets/search.png')}
+				        />
+				       
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.features} 
+						onPress={this.navigateToLiveTracking}>
+	    				<Image style={styles.icon1}
+				          source={require('../Assets/tracking.png')}
+				        />
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.features} 
+						onPress={() => {
+	    					this.props.navigation.navigate('Zone')}}>
+	    				<Image style={styles.icon1}
+				          source={require('../Assets/zone.png')}
+				        />
+					</TouchableOpacity>
 				</View>
 				{this.state.loading &&
 				<View style={styles.loading}>
 			      <ActivityIndicator size='large' />
 			    </View>
 			   	}
-			</View>
+			</ScrollView>
 		);
 	}
 }
@@ -101,11 +106,12 @@ const styles = StyleSheet.create({
 		flex:1,
 		alignItems:'center',
 		justifyContent:'center',
+		paddingVertical:20,
 	},
 
 	icon1:{
-		height:200,
-		width:200,
+		height:250,
+		width:280,
 	},
 
 	iconText:{
