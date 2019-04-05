@@ -9,7 +9,8 @@ class Home extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loading: false
+			loading: false,
+			zonedImages: []
 		}
 	}
 
@@ -32,8 +33,26 @@ class Home extends Component {
 			})
 		})
 	}
+
+	navigateToZoneAlert = () => {
+		this.setState({
+			loading: true
+		})
+		fetch('http://localhost:8000/getZonedData')
+		.then(res => res.json())
+		.then(resJson => {
+			this.setState({
+				loading: false
+			})
+			console.log(resJson);
+			this.props.navigation.navigate('Zone', {
+				zonedImages: resJson
+			})
+		})
+	}
 	
 	render() {
+		let count = this.props.navigation.getParam('count');
 		return (
 			<ScrollView style={styles.home}>
 				<View style={styles.header}>
@@ -55,12 +74,17 @@ class Home extends Component {
 				          source={require('../Assets/tracking.png')}
 				        />
 					</TouchableOpacity>
-					<TouchableOpacity style={styles.features} 
-						onPress={() => {
-	    					this.props.navigation.navigate('Zone')}}>
-	    				<Image style={styles.icon1}
-				          source={require('../Assets/zone.png')}
-				        />
+					<TouchableOpacity style={styles.features1} 
+						onPress={this.navigateToZoneAlert}>
+		    				<Image style={styles.icon1}
+					          source={require('../Assets/zone.png')}
+					        />
+					   		<View style={{position: 'absolute',zIndex:1}}>
+						        <View style={styles.alertNoti}>
+			    					<Text style={{textAlign:'center',color:'white',fontSize:13}}>{count}</Text>
+			    				</View>
+		    				</View>
+				       
 					</TouchableOpacity>
 				</View>
 				{this.state.loading &&
@@ -109,6 +133,20 @@ const styles = StyleSheet.create({
 		paddingVertical:20,
 	},
 
+	features1:{
+		flex:1,
+	},
+
+
+	alertNoti:{
+		height:26,
+		width:26,
+		backgroundColor:'red',
+		borderRadius:13,
+		justifyContent:'center',
+		
+	},
+
 	icon1:{
 		height:250,
 		width:280,
@@ -118,8 +156,9 @@ const styles = StyleSheet.create({
 		fontSize:50,
 		color:'#05c49f',
 	},
+
 	loading: {
-	position: 'absolute',
+		position: 'absolute',
 		left: 0,
 		right: 0,
 		top: 0,

@@ -20,7 +20,7 @@ class SelectedFaceLive extends Component{
 		let selectedFace = this.props.navigation.getParam('selectedFace');
 		let renderFaces = data.map(value => <Person body={value.Body} time={value.LastModified} />)
 		return(
-				<View style={styles.mainContainer}>
+				<ScrollView style={styles.mainContainer}>
 					<View style={styles.header}>
 						<TouchableOpacity onPress={() => {
 						this.props.navigation.goBack()}}>
@@ -38,7 +38,7 @@ class SelectedFaceLive extends Component{
 							</View>
 						</ScrollView>
 					</View>
-				</View>
+				</ScrollView>
 			);
 	}
 }

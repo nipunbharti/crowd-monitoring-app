@@ -13,13 +13,16 @@ class SplashScreen extends Component {
 		header: null
 	}
 
-	ComponentDidMount() {
-		
-	}
-
 	unMountSplash() {
 		setTimeout(() => {
-			this.props.navigation.navigate('Home')
+			fetch('http://localhost:8000/getZonedCount')
+			.then(res => res.json())
+			.then(resJson => {
+				console.log(resJson)
+				this.props.navigation.navigate('Home', {
+					count: resJson.count
+				})
+			})
 		}, 2000);
 	}
 
