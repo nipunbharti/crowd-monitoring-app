@@ -18,11 +18,9 @@ class SelectedFace extends Component{
 	render(){
 		let images = this.props.navigation.getParam('images');
 		let faceBody = this.props.navigation.getParam('faceBody');
-		console.log("Facebody", faceBody);
-		console.log(images);
-			let renderFaces = images.map(face => {
+		let renderFaces = images.map(face => {
 			return <Person navigation={this.props.navigation} face={face.body} name={face.name} />
-			})
+		})
 		return(
 				<ScrollView style={styles.mainContainer}>
 					<View style={styles.header}>

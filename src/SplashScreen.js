@@ -15,10 +15,9 @@ class SplashScreen extends Component {
 
 	unMountSplash() {
 		setTimeout(() => {
-			fetch('http://localhost:8000/getZonedCount')
+			fetch('https://cromdev-backend.herokuapp.com/getZonedCount')
 			.then(res => res.json())
 			.then(resJson => {
-				console.log(resJson)
 				this.props.navigation.navigate('Home', {
 					count: resJson.count
 				})

@@ -19,7 +19,6 @@ class SearchDisplay extends Component{
 
 	render(){
 		let images = this.props.navigation.getParam('images', 'Not found');
-		console.log(images);
 		let imageArray = [];
 		let renderFaces = images.map((face, index) => {
 			return <Faces key={index} navigation={this.props.navigation} image={face.body} name={face.name} />

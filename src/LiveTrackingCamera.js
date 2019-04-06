@@ -14,7 +14,7 @@ class LiveTrackingCamera extends Component{
 
 	navigateToLiveTracking = () => {
 		this.props.setStateToTrue();
-		fetch('http://localhost:8000/getFaceID', {
+		fetch('https://cromdev-backend.herokuapp.com/getFaceID', {
 			method: 'POST',
 			headers: {
 			  Accept: 'application/json',
@@ -26,8 +26,7 @@ class LiveTrackingCamera extends Component{
 		})
 		.then(res => res.json())
 		.then(resJson => {
-			console.log(resJson);
-			fetch('http://localhost:8000/getCroppedImage', {
+			fetch('https://cromdev-backend.herokuapp.com/getCroppedImage', {
 				method: 'POST',
 				headers: {
 				  Accept: 'application/json',

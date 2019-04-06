@@ -11,7 +11,8 @@ class DetectedFacesLive extends Component{
 	}
 
 	navigateToDetectedFace = () => {
-		fetch('http://localhost:8000/getImages', {
+		this.props.setStateToTrue();
+		fetch('https://cromdev-backend.herokuapp.com/getImages', {
 			method: 'POST',
 			headers: {
 			  Accept: 'application/json',
@@ -24,7 +25,7 @@ class DetectedFacesLive extends Component{
 		})
 		.then(res => res.json())
 		.then(resJson => {
-			console.log(resJson);
+			this.props.setStateToFalse();
 			this.props.navigation.navigate('SelectedFaceLive', {
 				data: resJson,
 				selectedFace: this.props.body

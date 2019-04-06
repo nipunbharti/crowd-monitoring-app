@@ -29,8 +29,7 @@ class Search extends Component{
 		this.setState({
 			loading: true
 		})
-		console.log(this.state.date.slice(0,4).concat('2019'+this.state.time1), this.state.date.slice(0,4).concat('2019'+this.state.time2));
-		fetch('http://localhost:8000/timeSlicedImages', {
+		fetch('https://cromdev-backend.herokuapp.com/timeSlicedImages', {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
@@ -46,9 +45,7 @@ class Search extends Component{
 			let newResJson = resJson.map(res =>{
 				return {'body': res.Body, 'name': res.name}
 			});
-			console.log(newResJson);
 			let newResName = resJson.map(res => res.name);
-			// console.log(newResJson);
 			var newImages = [];
 			let i=0;
 			this.setState({
@@ -105,7 +102,6 @@ class Search extends Component{
 	}
 
 	render(){
-		console.log(this.state.images);
 		if(this.state.images)
 		return(
 

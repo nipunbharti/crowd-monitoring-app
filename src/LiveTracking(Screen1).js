@@ -42,9 +42,12 @@ class LiveTracking extends Component{
 	}
 
 	render(){
-		let mainImageBody = this.props.navigation.getParam('mainImageBody');
-		let mainImageName = this.props.navigation.getParam('mainImageName');
-		let mainImageTime = this.props.navigation.getParam('mainImageTime');
+		let mainImageBody1 = this.props.navigation.getParam('mainImageBody1');
+		let mainImageName1 = this.props.navigation.getParam('mainImageName1');
+		let mainImageTime1 = this.props.navigation.getParam('mainImageTime1');
+		let mainImageBody2 = this.props.navigation.getParam('mainImageBody2');
+		let mainImageName2 = this.props.navigation.getParam('mainImageName2');
+		let mainImageTime2 = this.props.navigation.getParam('mainImageTime2');
 		return(
 
 				<ScrollView>
@@ -63,8 +66,8 @@ class LiveTracking extends Component{
 					        />
 					    }
 					        <View style={{paddingVertical:40}}>
-					        	<LiveTrackingCamera navigation={this.props.navigation} setStateToTrue={this.setStateToTrue} setStateToFalse={this.setStateToFalse} body={mainImageBody} name={mainImageName} time={mainImageTime} />
-					        	<LiveTrackingCamera navigation={this.props.navigation} />
+					        	<LiveTrackingCamera navigation={this.props.navigation} setStateToTrue={this.setStateToTrue} setStateToFalse={this.setStateToFalse} body={mainImageBody1} name={mainImageName1} time={mainImageTime1} />
+					        	<LiveTrackingCamera navigation={this.props.navigation} setStateToTrue={this.setStateToTrue} setStateToFalse={this.setStateToFalse} body={mainImageBody2} name={mainImageName2} time={mainImageTime2} />
 							</View>
 					</View>
 					{this.state.loading &&

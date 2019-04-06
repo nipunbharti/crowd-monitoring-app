@@ -11,7 +11,8 @@ class SelectedCamera extends Component{
 	constructor(props){
 		super(props);
 		this.state ={
-			live:true
+			live:true,
+			loading: false
 		};
 	}
 
@@ -27,12 +28,24 @@ class SelectedCamera extends Component{
 		    }, 1000);
 		}
 
+	setStateToTrue = () => {
+		this.setState({
+			loading: true
+		})
+	}
+
+	setStateToFalse = () => {
+		this.setState({
+			loading: false
+		})
+	}
+
 	render(){
 		let croppedData = this.props.navigation.getParam('croppedData');
 		let mainImageBody = this.props.navigation.getParam('mainImageBody');
 		let mainImageName = this.props.navigation.getParam('mainImageName');
 		let mainImageTime = this.props.navigation.getParam('mainImageTime');
-		let renderCroppedFaces = croppedData.map((face, index) => <DetectedFacesLive mainImageName={mainImageName} navigation={this.props.navigation} body={face.body} faceId={face.faceId} />)
+		let renderCroppedFaces = croppedData.map((face, index) => <DetectedFacesLive setStateToTrue={this.setStateToTrue} setStateToFalse={this.setStateToFalse} mainImageName={mainImageName} navigation={this.props.navigation} body={face.body} faceId={face.faceId} />)
 		return(
 				<ScrollView style={styles.mainContainer}>
 					<View style={styles.header}>
@@ -58,6 +71,11 @@ class SelectedCamera extends Component{
 								</ScrollView>
 							</View>
 					</View>
+					{this.state.loading &&
+					<View style={styles.loading}>
+				      <ActivityIndicator size='large' />
+				    </View>
+				   	}
 				</ScrollView>
 			);
 	}

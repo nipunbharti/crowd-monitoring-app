@@ -23,13 +23,12 @@ class Zone extends Component{
 		this.setState({
 			loading: true
 		});
-		fetch('http://localhost:8000/setTrueZone')
+		fetch('https://cromdev-backend.herokuapp.com/setTrueZone')
 		.then(res => res.json())
 		.then(resJson => {
 			this.setState({
 				loading: false
 			});
-			console.log(resJson);
 			this.props.navigation.navigate('Home', {
 				count: 0
 			})
@@ -41,7 +40,7 @@ class Zone extends Component{
 		let zonedImages = this.props.navigation.getParam('zonedImages');
 		let zoneTrackingCamera = zonedImages.map((val, index) => <ZoneTrackingCamera body={val.Body} key={index} />)
 		return(
-			<View style={styles.mainContainer}>
+			<ScrollView style={styles.mainContainer}>
 				<View style={styles.header}>
 					<TouchableOpacity onPress={() => {
 					this.props.navigation.goBack()}}>
@@ -60,7 +59,7 @@ class Zone extends Component{
 			      <ActivityIndicator size='large' />
 			    </View>
 			   	}
-			</View>
+			</ScrollView>
 			);
 	}
 }

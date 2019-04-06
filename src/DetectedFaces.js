@@ -11,8 +11,7 @@ class DetectedFaces extends Component{
 	}
 
 	navigateToSelectedFace = () => {
-		console.log(this.props.faceId, this.props.name);
-		fetch('http://localhost:8000/getImages', {
+		fetch('https://cromdev-backend.herokuapp.com/getImages', {
 			method: 'POST',
 			headers: {
 			  Accept: 'application/json',
@@ -28,7 +27,6 @@ class DetectedFaces extends Component{
 			let newResJson = resJson.map(res => {
 				return {'body': res.Body, 'name': res.name}
 			})
-			console.log(newResJson);
 			this.props.navigation.navigate('SelectedFace', {
 				faceBody: this.props.faceBody,
 				images: newResJson

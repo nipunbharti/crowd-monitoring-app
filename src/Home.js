@@ -22,14 +22,17 @@ class Home extends Component {
 		this.setState({
 			loading: true
 		})
-		fetch('http://localhost:8000/getLatestImage')
+		fetch('https://cromdev-backend.herokuapp.com/getLatestImage')
 		.then(res => res.json())
 		.then(resJson => {
 			this.setState({loading: false})
 			this.props.navigation.navigate('LiveTracking', {
-				mainImageBody: resJson.Body,
-				mainImageName: resJson.name,
-				mainImageTime: resJson.LastModified
+				mainImageBody1: resJson.cam1.Body,
+				mainImageName1: resJson.cam1.name,
+				mainImageTime1: resJson.cam1.LastModified,
+				mainImageBody2: resJson.cam2.Body,
+				mainImageName2: resJson.cam2.name,
+				mainImageTime2: resJson.cam2.LastModified
 			})
 		})
 	}
@@ -38,13 +41,12 @@ class Home extends Component {
 		this.setState({
 			loading: true
 		})
-		fetch('http://localhost:8000/getZonedData')
+		fetch('https://cromdev-backend.herokuapp.com/getZonedData')
 		.then(res => res.json())
 		.then(resJson => {
 			this.setState({
 				loading: false
 			})
-			console.log(resJson);
 			this.props.navigation.navigate('Zone', {
 				zonedImages: resJson
 			})
@@ -59,6 +61,7 @@ class Home extends Component {
 					<Text style={styles.headerText}>CroMdev</Text>
 				</View>
 				<View style={styles.mainContainer}>
+					<View style={{paddingBottom:20}}/>
 					<TouchableOpacity style={styles.features}
 						onPress={() => {
 	    					this.props.navigation.navigate('Search')}}
@@ -73,7 +76,9 @@ class Home extends Component {
 	    				<Image style={styles.icon1}
 				          source={require('../Assets/tracking.png')}
 				        />
+
 					</TouchableOpacity>
+					<View style={{paddingBottom:20}}/>
 					<TouchableOpacity style={styles.features1} 
 						onPress={this.navigateToZoneAlert}>
 		    				<Image style={styles.icon1}
@@ -135,6 +140,7 @@ const styles = StyleSheet.create({
 
 	features1:{
 		flex:1,
+		//paddingVertical:20,
 	},
 
 
